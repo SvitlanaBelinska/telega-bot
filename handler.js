@@ -7,17 +7,17 @@ module.exports.processWebhook = async event => {
     console.log(body); // Логируем body
 
     if (body && body.message) {
-        const {message_id, chat, text} = body.message;
+        const {message_id, chat, text, from} = body.message;
         console.log(body.message);
         if (body.message) {
-        await dynamo.dynamo(message_id, chat.first_name, chat.last_name, text, ()=>{});
+        await dynamo.dynamo(message_id, from.first_name, from.last_name, text, ()=>{});
         }
         if(text == 'hello'){
-        await telegram.sendMessage({ chat_id: chat.id, text: `Hi , nice to meet you ${chat.first_name}` });
+        await telegram.sendMessage({ chat_id: chat.id, text: `Hi , nice to meet you ${from.first_name}` });
         
         } else {
         
-        await telegram.sendMessage({ chat_id: chat.id,  text: `${chat.last_name} You said: ${text}` });
+        await telegram.sendMessage({ chat_id: chat.id,  text: `${from.last_name} You said: ${text}` });
         }
     }
   

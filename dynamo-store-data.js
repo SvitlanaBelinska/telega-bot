@@ -6,6 +6,7 @@ const dynamoDB = new AWS.DynamoDB({
 
 exports.dynamo = (message_id, first_name, last_name, text, callback) => {
     console.log(message_id, first_name, last_name, text)
+
     const params = {
         Item:{
             "message_id": {
